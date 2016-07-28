@@ -3,9 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Budget1"
              x:Class="Budget1.MainPage">
-
-  <Label Text="Welcome to Xamarin Forms!"
-           VerticalOptions="Center"
-           HorizontalOptions="Center" />
-
+  <StackLayout>
+    <Label Text ="The List is:" HorizontalOptions="Center" FontSize="20"></Label>
+    <ListView x:Name="CategoryList"
+              ItemsSource="{Binding MyExpanses}"
+              ItemTapped="OnItemTapped">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <ViewCell.View>
+              <StackLayout Padding="10">
+                <StackLayout Orientation="Horizontal">
+                  <Label Text ="{Binding Category}" FontSize="14"></Label>
+                  <Label Text ="{Binding Thing}" FontSize="14"></Label>
+                </StackLayout>
+               <StackLayout Orientation="Horizontal">
+                      <Label Text="{Binding Price}" FontSize="10"/>
+                    </StackLayout>
+              </StackLayout>
+              </ViewCell.View>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
 </ContentPage>
