@@ -4,6 +4,11 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using Budget1.Data;
+using Xamarin.Forms;
+using static Budget1.iOS.AppDelegate;
+
+[assembly: Dependency(typeof(SQLite_iOS))]
 
 namespace Budget1.iOS
 {
@@ -26,6 +31,27 @@ namespace Budget1.iOS
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public class SQLite_iOS : ISQLite
+        {
+            public SQLite_iOS()
+            {
+            }
+
+            public SQLite.SQLiteConnection GetConnection()
+            {
+                //				var sqliteFilename = "Contact.db";
+                //				string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); // Documents folder
+                //				string libraryPath = Path.Combine (documentsPath, "..", "Library"); // Library folder
+                //				var path = Path.Combine(libraryPath, sqliteFilename);
+                var path = "Contact.db";
+
+                var conn = new SQLite.SQLiteConnection(path);
+
+                return conn;
+            }
+
         }
     }
 }

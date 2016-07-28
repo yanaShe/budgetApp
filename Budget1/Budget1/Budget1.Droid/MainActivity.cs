@@ -1,11 +1,12 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Budget1.Data;
+using System.Runtime.CompilerServices;
 
 namespace Budget1.Droid
 {
