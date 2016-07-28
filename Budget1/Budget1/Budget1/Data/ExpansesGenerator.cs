@@ -16,7 +16,7 @@ namespace Budget1.Data
         private static List<int> Prices = new List<int> { 20, 25, 300, 60 };
 
 
-        public static async Task<List<Exapnses>> CreateExpanse()
+        public static List<Exapnses> CreateExpanse()
         {
             List<Exapnses> expanses = new List<Exapnses>();
 

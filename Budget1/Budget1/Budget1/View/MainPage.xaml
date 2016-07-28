@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:Budget1"
              x:Class="Budget1.MainPage">
   <StackLayout>
-    <Label Text ="The List is:" HorizontalOptions="Center" FontSize="20"></Label>
+    <Label Text ="The List is:" HorizontalOptions="Center" FontSize="25"></Label>
     <ListView x:Name="CategoryList"
               ItemsSource="{Binding MyExpanses}"
               ItemTapped="OnItemTapped">

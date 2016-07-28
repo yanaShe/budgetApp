@@ -1,5 +1,6 @@
 ﻿using Budget1.Data;
 using Budget1.Models;
+using Budget1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +12,13 @@ namespace Budget1
 {
     public partial class MainPage : ContentPage
     {
-        public List<Exapnses> MyExpanses { get; set; }
+        MainPageViewModel vm;
+
         public MainPage()
         {
-            Init();
             InitializeComponent();
-        }
-
-        private async Task Init()
-        {
-            MyExpanses = new List<Exapnses>();
-
-            var listOfExapnses = new List<Exapnses>();
-            listOfExapnses = await ExpansesGenerator.CreateExpanse();
-            MyExpanses = listOfExapnses;
-            BindingContext = this;
+            vm = new MainPageViewModel();
+            BindingContext = vm;
         }
 
         public void OnItemTapped(object o, ItemTappedEventArgs e)
