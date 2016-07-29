@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Budget1.Data;
+using Budget1.View;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +15,22 @@ namespace Budget1
         {
             InitializeComponent();
 
-            MainPage = new Budget1.MainPage();
+            MainPage = new NavigationPage(new ExpanseEntry());
         }
 
+        static ExpansesDatabase database;
+        public static ExpansesDatabase Database {
+            get{
+                if (database==null)
+                {
+                    database = new ExpansesDatabase();
+                }
+                return database;
+            }
+        }
+
+
+    
         protected override void OnStart()
         {
             // Handle when your app starts

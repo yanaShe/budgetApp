@@ -1,5 +1,6 @@
 ﻿using Budget1.Data;
 using Budget1.Models;
+using Budget1.View;
 using Budget1.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -12,25 +13,31 @@ namespace Budget1
 {
     public partial class MainPage : ContentPage
     {
-        MainPageViewModel vm;
 
         public MainPage()
         {
             InitializeComponent();
-            vm = new MainPageViewModel();
-            BindingContext = vm;
         }
 
         public void OnItemTapped(object o, ItemTappedEventArgs e)
         {
             var expanse = e.Item as Exapnses;
+            Navigation.PushAsync(new ExpanseEntry(expanse.ID));
+        }
 
-            if (e != null)
-            {
-                DisplayAlert("Yep", String.Format("You Selected: {0}, {1}", expanse.Category, expanse.Thing), "Ok");
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            CategoryList.ItemsSource = App.Database.GetExpanses();
+        }
 
-            }
+        protected void OnNewEntry(object o, EventArgs e)
+        {
+            var rootPage = new NavigationPage(new ExpanseEntry());
+            Button button = (Button) o;
+            button.Navigation.PushAsync(rootPage);
         }
 
     }
 }
+

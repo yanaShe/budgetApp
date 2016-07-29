@@ -16,7 +16,7 @@ namespace Budget1.Data
 
         public ExpansesDatabase()
         {
-            DependencyService.Get<ISQLite>().GetConnection();
+            dataBase = DependencyService.Get<ISQLite>().GetConnection();
             dataBase.CreateTable<Exapnses>();
         }
 

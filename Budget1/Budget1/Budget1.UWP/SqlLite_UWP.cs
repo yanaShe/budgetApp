@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Windows.Storage;
 using Budget1.UWP;
+using System.IO;
 
 [assembly: Dependency(typeof(SQLite_UWP))]
 namespace Budget1.UWP
@@ -17,14 +18,10 @@ namespace Budget1.UWP
         public SQLite.SQLiteConnection GetConnection()
         {
             //This is the right implenentation:
-            //				var sqliteFilename = "Expanse.db";
-            //				string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); // Documents folder
-            //				string libraryPath = Path.Combine (documentsPath, "..", "Library"); // Library folder
-            //				var path = Path.Combine(libraryPath, sqliteFilename);
-            var path = "Expanse.db"; // temporarily set our path to a local file
-
+            var sqliteFilename = "Expanses.db";
+            string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, sqliteFilename);
             var conn = new SQLite.SQLiteConnection(path);
-
+            //var path = "/Assets/Expanses.db"; // temporarily set our path to a local file
             return conn;
         }
     }

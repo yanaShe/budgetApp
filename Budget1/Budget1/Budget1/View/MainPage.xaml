@@ -5,8 +5,8 @@
              x:Class="Budget1.MainPage">
   <StackLayout>
     <Label Text ="The List is:" HorizontalOptions="Center" FontSize="25"></Label>
+      <Button Text="New Entry" Clicked="OnNewEntry" />
     <ListView x:Name="CategoryList"
-              ItemsSource="{Binding MyExpanses}"
               ItemTapped="OnItemTapped">
       <ListView.ItemTemplate>
         <DataTemplate>
