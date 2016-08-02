@@ -12,6 +12,7 @@ using Android.Widget;
 using Xamarin.Forms;
 using Budget1.Droid;
 using Budget1.Data;
+using System.IO;
 
 [assembly: Dependency(typeof(SQLite_Android))]
 
@@ -23,14 +24,11 @@ namespace Budget1.Droid
         public SQLite.SQLiteConnection GetConnection()
         {
             //This is the right implenentation:
-            //				var sqliteFilename = "Expanse.db";
-            //				string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal); // Documents folder
-            //				string libraryPath = Path.Combine (documentsPath, "..", "Library"); // Library folder
-            //				var path = Path.Combine(libraryPath, sqliteFilename);
-            var path = "Expanse.db"; // temporarily set our path to a local file
-
-            var conn = new SQLite.SQLiteConnection(path);
-
+           var sqliteFilename = "Expanse.db";
+           string documentsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal); // Documents folder
+           var path = Path.Combine(documentsPath, sqliteFilename);
+            // Create the connection
+           var conn = new SQLite.SQLiteConnection(path);
             return conn;
         }
 
