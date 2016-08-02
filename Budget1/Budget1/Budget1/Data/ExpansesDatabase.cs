@@ -28,8 +28,7 @@ namespace Budget1.Data
                 {
                     dataBase.Update(expanse);
                     return expanse.ID;
-                }
-                else
+                } else
                 {
                     return dataBase.Insert(expanse);
                 }

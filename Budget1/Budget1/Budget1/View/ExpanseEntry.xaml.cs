@@ -20,6 +20,7 @@ namespace Budget1.View
             Category.Text = expanse.Category;
             Thing.Text = expanse.Thing;
             Price.Text =expanse.Price.ToString();
+            updatedID = Id;
         }
 
         public ExpanseEntry()
@@ -52,6 +53,12 @@ namespace Budget1.View
         private void OnReview(object o, EventArgs e)
         {
             Navigation.PushAsync(new MainPage());
+        }
+
+        private void OnDelete(object o , EventArgs e)
+        {
+            App.Database.DeleteExpanse(updatedID);
+            Clear();
         }
     }
 }

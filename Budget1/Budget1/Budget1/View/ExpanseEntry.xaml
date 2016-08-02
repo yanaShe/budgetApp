@@ -18,6 +18,7 @@
     <Button x:Name="Save" Text="Save" Clicked="OnSave"></Button>
     <Button x:Name="Cancel" Text="Cancel" Clicked="OnCancel"></Button>
     <Button x:Name="Review" Text="Review" Clicked="OnReview"></Button>
+    <Button x:Name="Delete" Text="Delete" Clicked="OnDelete"></Button>
   </StackLayout>
   </StackLayout>
     </ContentPage>
