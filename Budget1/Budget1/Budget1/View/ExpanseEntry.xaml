@@ -8,8 +8,8 @@
             x:Name="Category"
             Placeholder="Category" />
     <Entry
-      x:Name="Thing"
-      Placeholder="Thing" />
+      x:Name="Item"
+      Placeholder="Item" />
     <Entry
       x:Name="Price"
       Placeholder="Price" />  

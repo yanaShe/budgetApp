@@ -16,6 +16,7 @@ namespace Budget1.ViewModel
         {
             MyExpanses = new List<Exapnses>();
             var listOfExapnses = new List<Exapnses>();
+            
             listOfExapnses =  ExpansesGenerator.CreateExpanse();
             MyExpanses = listOfExapnses;
         }

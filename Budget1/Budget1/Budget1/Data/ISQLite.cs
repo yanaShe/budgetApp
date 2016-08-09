@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Microsoft.VisualBasic.CompilerServices;
+using SQLite.Net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Budget1.Data
     public interface ISQLite
     {
         SQLiteConnection GetConnection();
+        //CreateConnection();
 
     }
 }

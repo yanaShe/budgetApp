@@ -13,9 +13,11 @@
           <ViewCell>
             <ViewCell.View>
               <StackLayout Padding="10">
-                <StackLayout Orientation="Horizontal">
+                <StackLayout>
                   <Label Text ="{Binding Category}" FontSize="16"></Label>
-                  <Label Text ="{Binding Thing}" FontSize="14"></Label>
+                  <StackLayout Orientation="Horizontal">
+                  <Label Text ="{Binding Item}" FontSize="14"></Label>
+                  </StackLayout>
                 </StackLayout>
                <StackLayout Orientation="Horizontal">
                       <Label Text="{Binding Price}" FontSize="12"/>

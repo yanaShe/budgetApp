@@ -11,7 +11,7 @@ namespace Budget1.Data
     {
         private static List<string> Categories = new List<string> { "Clothes", "Toys", "Appliances", "Food" };
 
-        private static List<string> Things = new List<string> { "Dress", "Toy Truck", "Washing Machine", "Restaurant" };
+        private static List<string> Items = new List<string> { "Dress", "Toy Truck", "Washing Machine", "Restaurant" };
 
         private static List<int> Prices = new List<int> { 20, 25, 300, 60 };
 
@@ -23,12 +23,12 @@ namespace Budget1.Data
             for (int i = 0; i < 4; i++)
             {
                 string category = Categories[i];
-                string thing = Things[i];
+                string thing = Items[i];
                 int price = Prices[i];
                 Exapnses expanse = new Exapnses();
 
                 expanse.Category = category;
-                expanse.Thing = thing;
+                expanse.Item = thing;
                 expanse.Price = price;
 
                 expanses.Add(expanse);

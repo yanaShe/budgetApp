@@ -23,12 +23,17 @@ namespace Budget1
         {
             var expanse = e.Item as Exapnses;
             Navigation.PushAsync(new ExpanseEntry(expanse.ID));
+            
+            
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
             CategoryList.ItemsSource = App.Database.GetExpanses();
+            
+            
+
         }
 
         protected void OnNewEntry(object o, EventArgs e)
