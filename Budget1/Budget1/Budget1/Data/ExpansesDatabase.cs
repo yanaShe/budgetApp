@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
+using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Extensions;
-
+using System.Diagnostics;
 
 namespace Budget1.Data
 {
@@ -22,28 +23,33 @@ namespace Budget1.Data
             
     }
 
-        internal object GetItem(int id)
+        public Items GetItem(int id)
         {
             lock (locker)
             {
-                return dataBase.Table<Items>().Where(c => c.Id == id).FirstOrDefault();
+
+                return dataBase.GetWithChildren<Items>(id);
+                //dataBase.Table<Items>().Where(c => c.Id==id).FirstOrDefault();
             }
         }
 
-        public int SaveExpanse(Exapnses expanse)
+        public void SaveExpanse(Exapnses expanse)
         {
             lock (locker)
             {
+
                 if (expanse.ID != 0)
                 {
-                    //dataBase.Update(expanse);
-                    dataBase.UpdateWithChildren(expanse);
-                    return expanse.ID;
 
-                    
+                    dataBase.UpdateWithChildren(expanse);
+                    //return expanse.ID;
+
                 } else
+
                 {
-                    return dataBase.Insert(expanse);
+                     dataBase.InsertWithChildren(expanse);
+                    //return expanse.ID;
+
                 }
             }
         }
@@ -73,36 +79,11 @@ namespace Budget1.Data
             }
         }
 
-        //public IEnumerable<Exapnses> GetItems()
-        //{
-        //    lock (locker)
-        //    {
-        //        var data = from c in dataBase.Table<Exapnses>()
-        //                   group c by c.Category;
-
-        //        return (IEnumerable<Exapnses>)data.ToList();
-
-        //    }
-        //}
         public Exapnses GetExpanse(int id)
         {
             lock (locker)
             {
-                return dataBase.Table<Exapnses>().Where(c => c.ID == id).FirstOrDefault();
-            }
-        }
-
-        public IEnumerable<Exapnses> GroupItemByCategory()
-        {
-            lock (locker)
-            {
-                //return dataBase.Table<Exapnses>().Where(c => c.Category == expenses.Category).ToList();
-                var query = (from c in dataBase.Table<Exapnses>()
-                             group c by c.Category into results
-                             orderby results.Key
-                             select results).ToList();
-
-                return (IEnumerable<Exapnses>)query;
+                return dataBase.GetWithChildren<Exapnses>(id);
             }
         }
         
@@ -111,6 +92,14 @@ namespace Budget1.Data
             lock (locker)
             {
                 return dataBase.Delete<Exapnses>(id);
+            }
+        }
+
+        public int DeleteItem(int id)
+        {
+            lock (locker)
+            {
+                return dataBase.Delete<Items>(id);
             }
         }
 

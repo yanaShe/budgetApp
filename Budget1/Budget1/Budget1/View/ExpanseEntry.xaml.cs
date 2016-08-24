@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +20,11 @@ namespace Budget1.View
         {
             InitializeComponent();
             var expanse = App.Database.GetExpanse(Id);
-            var item = App.Database.GetItem(Id);
+            var item = App.Database.GetItem(expanse.ID);
+            
+
             Category.Text = expanse.Category;
-            Item.Text = item.item;
+            Item.Text = item.Item;
             Price.Text = item.Price.ToString();
             updatedID = Id;
             updatedIDItem = Id;
@@ -34,21 +37,22 @@ namespace Budget1.View
 
         public void OnSave(object o, EventArgs e)
         {
-            Exapnses expanse = new Exapnses();
-            Items item = new Items();
-
-            expanse.Category = Category.Text;
-            item.Item = Item.Text;
-            item.Price = Int32.Parse(Price.Text);
-            expanse.ID = updatedID;
-            item.Id = updatedIDItem;
-
-            expanse.Items = new List<Items> { item };
-
-            Clear();
-            App.Database.SaveExpanse(expanse);
+            Items item = new Items
+            {
+                Item = Item.Text,
+                Price = Int32.Parse(Price.Text),
+   
+            };
             App.Database.SaveItems(item);
 
+            Exapnses expanse = new Exapnses {
+                Category = Category.Text,
+                Items =new List<Items> {item}
+        };
+
+            App.Database.SaveExpanse(expanse);
+
+            Clear();
             Navigation.PushAsync(new MainPage());
         }
 

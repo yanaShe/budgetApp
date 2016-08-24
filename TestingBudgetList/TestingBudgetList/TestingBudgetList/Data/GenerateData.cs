@@ -9,9 +9,7 @@ namespace TestingBudgetList.Data
 {
     public class GenerateData
     {
-        public GenerateData()
-        {
-            List<Exapnses> expanses = new List<Exapnses>
+        private static List<Exapnses> expanses = new List<Exapnses>
                             {
                                 new Exapnses
                                     {
@@ -32,7 +30,41 @@ namespace TestingBudgetList.Data
                                                      }
                                     }
         };
+        public  GenerateData()
+        {
 
-        }              
+        }
+        public static List<Exapnses> NewData()
+        {
+            return expanses;
+        } 
+
+        public static List<Exapnses> AddItem( string category, string item, int price)
+        {
+            var items = new Items { Item = item, Price = price };
+
+            if (expanses.Exists(x => x.Category == category))
+            {
+                foreach (var exp in expanses)
+                {
+                    if (exp.Category == category)
+                        {
+                            exp.Items.Add(items);
+                        }
+                    }
+                }
+           else
+            {
+                expanses.Add(new Exapnses
+                {
+                    Category = category,
+                    Items = new List<Items>
+                { new Items {Item = item, Price=price}}
+
+                });
+            }
+
+            return expanses;
+        }     
     }
 }

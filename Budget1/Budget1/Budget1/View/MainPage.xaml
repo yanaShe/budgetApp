@@ -6,8 +6,7 @@
   <StackLayout>
     <Label Text ="The List is:" HorizontalOptions="Center" FontSize="25"></Label>
       <Button Text="New Entry" Clicked="OnNewEntry" />
-    <ListView x:Name="CategoryList"
-              ItemTapped="OnItemTapped">
+    <ListView x:Name="CategoryList">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
@@ -16,12 +15,22 @@
                 <StackLayout>
                   <Label Text ="{Binding Category}" FontSize="16"></Label>
                   <StackLayout Orientation="Horizontal">
-                  <Label Text ="{Binding Item}" FontSize="14"></Label>
+                    <ListView x:Name="ItemList" ItemsSource="{Binding Items}" ItemTapped="OnItemTapped">
+                      <ListView.ItemTemplate>
+                        <DataTemplate>
+                          <ViewCell>
+                            <ViewCell.View>
+                              <StackLayout>
+                                <Label Text="{Binding Item}" FontSize="14"/>
+                                <Label Text="{Binding Price}" FontSize="12"/>
+                              </StackLayout>
+                            </ViewCell.View>
+                          </ViewCell>
+                        </DataTemplate>
+                      </ListView.ItemTemplate>
+                    </ListView>
                   </StackLayout>
                 </StackLayout>
-               <StackLayout Orientation="Horizontal">
-                      <Label Text="{Binding Price}" FontSize="12"/>
-                    </StackLayout>
               </StackLayout>
               </ViewCell.View>
           </ViewCell>

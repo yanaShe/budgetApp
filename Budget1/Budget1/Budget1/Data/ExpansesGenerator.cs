@@ -26,10 +26,16 @@ namespace Budget1.Data
                 string thing = Items[i];
                 int price = Prices[i];
                 Exapnses expanse = new Exapnses();
-
+                Items item = new Items();
+                
                 expanse.Category = category;
-                expanse.Item = thing;
-                expanse.Price = price;
+                item.Item = thing;
+                item.Price = price;
+
+                expanse.Items = new List<Items>
+                {
+                   item
+                };
 
                 expanses.Add(expanse);
             }

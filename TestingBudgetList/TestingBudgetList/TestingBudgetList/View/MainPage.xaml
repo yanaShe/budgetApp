@@ -2,10 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TestingBudgetList"
-             x:Class="TestingBudgetList.MainPage">
+             x:Class="TestingBudgetList.View.MainPage">
+  <ContentPage.Content>
   <StackLayout>
-    <Label Text ="The List is:" HorizontalOptions="Center" FontSize="25"></Label>
-    <ListView x:Name="CategoryList">
+    <StackLayout HorizontalOptions="Start">
+    <Label x:Name="Mylabel" Text ="The List is:" HorizontalOptions="Center" FontSize="40"></Label>
+    <Button x:Name="AddNewItem" Text="Add New Item" Clicked="AddItemPage"/>
+      </StackLayout>
+    <ListView x:Name="CategoryList" ItemTapped="OnCategoryTapped">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
@@ -14,7 +18,7 @@
                 <StackLayout>
                   <Label Text ="{Binding Category}" FontSize="16"></Label>
                   <StackLayout Orientation="Horizontal">
-                    <ListView ItemsSource="{Binding Items}">
+                    <ListView ItemsSource="{Binding Items}" ItemTapped="OnItemTapped">
                       <ListView.ItemTemplate>
                         <DataTemplate>
                           <ViewCell>
@@ -37,4 +41,5 @@
       </ListView.ItemTemplate>
     </ListView>
   </StackLayout>
+  </ContentPage.Content>
 </ContentPage>

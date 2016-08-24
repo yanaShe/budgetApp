@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TestingBudgetList.View;
 
 using Xamarin.Forms;
 
@@ -13,7 +14,7 @@ namespace TestingBudgetList
         {
             InitializeComponent();
 
-            MainPage = new TestingBudgetList.MainPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

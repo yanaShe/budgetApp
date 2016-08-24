@@ -4,6 +4,7 @@ using Budget1.View;
 using Budget1.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,8 @@ namespace Budget1
 
         public void OnItemTapped(object o, ItemTappedEventArgs e)
         {
-            var expanse = e.Item as Exapnses;
-            Navigation.PushAsync(new ExpanseEntry(expanse.ID));
+            var expanse = e.Item as Items;
+            Navigation.PushAsync(new ExpanseEntry(expanse.Id));
             
             
         }
@@ -31,8 +32,6 @@ namespace Budget1
         {
             base.OnAppearing();
             CategoryList.ItemsSource = App.Database.GetExpanses();
-            
-            
 
         }
 
