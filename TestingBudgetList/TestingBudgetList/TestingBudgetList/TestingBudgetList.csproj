@@ -39,6 +39,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\GenerateData.cs" />
+    <Compile Include="Data\Serialization.cs" />
     <Compile Include="ViewModel\MainPageViewModel.cs" />
     <Compile Include="View\AddItemPage.xaml.cs">
       <DependentUpon>AddItemPage.xaml</DependentUpon>

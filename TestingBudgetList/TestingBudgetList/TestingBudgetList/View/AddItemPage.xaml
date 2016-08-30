@@ -2,18 +2,42 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestingBudgetList.View.AddItemPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+    <Style x:Key="MissingStyle" TargetType="Label">
+      <Setter Property="TextColor" Value="Red" />
+      <Setter Property="IsVisible" Value="True"/>
+      <Setter Property="Text" Value="*"/>
+    </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
   <ContentPage.Content>
     <StackLayout>
       <Label Text="Enter new Item" VerticalOptions="Center"/>
+      <StackLayout Orientation="Horizontal">
       <Entry
         x:Name="Category"
-        Placeholder="Category" />
+        Placeholder="Category"
+        WidthRequest="150"
+        TextChanged="Category_TextChanged"/>
+        <Label x:Name="textbox" Style="{StaticResource MissingStyle}"/>
+      </StackLayout>
+      <StackLayout Orientation="Horizontal">
       <Entry
         x:Name="Item"
-        Placeholder="Item" />
+        Placeholder="Item"
+        WidthRequest="150"
+        TextChanged="Item_TextChanged"/>
+        <Label x:Name="itembox" Style="{StaticResource MissingStyle}"/>
+      </StackLayout>
+      <StackLayout Orientation="Horizontal">
       <Entry
         x:Name="Price"
-        Placeholder="Price" />
+        Placeholder="Price" 
+        TextChanged="Price_TextChanged"
+        WidthRequest="150"/>
+        <Label x:Name="pricebox" Style="{StaticResource MissingStyle}"/>
+      </StackLayout>
     <StackLayout
         Orientation="Horizontal">
       <Button

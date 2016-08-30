@@ -28,7 +28,8 @@ namespace Budget1.Data
             lock (locker)
             {
 
-                return dataBase.GetWithChildren<Items>(id);
+                return dataBase.Get<Items>(id);                
+                //return (from c in dataBase.Table<Items>() where (c.CategoryId==id) select c).ToList();
                 //dataBase.Table<Items>().Where(c => c.Id==id).FirstOrDefault();
             }
         }
@@ -41,43 +42,51 @@ namespace Budget1.Data
                 if (expanse.ID != 0)
                 {
 
-                    dataBase.UpdateWithChildren(expanse);
+                    dataBase.Update(expanse);
                     //return expanse.ID;
 
                 } else
 
                 {
-                     dataBase.InsertWithChildren(expanse);
+                     dataBase.Insert(expanse);
                     //return expanse.ID;
 
                 }
             }
         }
 
-        public IEnumerable<Exapnses> GetExpanses()
-        {
-            lock (locker)
-            {
-                return (from c in dataBase.Table<Exapnses>() select c).ToList();
-
-            }
-        }
-
-        public int SaveItems(Items item)
+        public void SaveItems(Items item)
         {
             lock (locker)
             {
                 if (item.Id != 0)
                 {
                     dataBase.Update(item);
-                    return item.Id;
                 }
                 else
                 {
-                    return dataBase.Insert(item);
+                    dataBase.Insert(item);
                 }
             }
         }
+
+        public void SaveAll(Exapnses expanse, Items item)
+        {
+            expanse.Items = new List<Items> { item };
+            dataBase.UpdateWithChildren(expanse); 
+        }
+
+        public IEnumerable<Exapnses> GetExpanses()
+        {
+            lock (locker)
+            {
+                //return (from c in dataBase.Table<Exapnses>() select c).ToList();
+
+                return dataBase.GetAllWithChildren<Exapnses>();
+
+            }
+        }
+
 
         public Exapnses GetExpanse(int id)
         {
@@ -86,7 +95,13 @@ namespace Budget1.Data
                 return dataBase.GetWithChildren<Exapnses>(id);
             }
         }
-        
+
+        public string GetCategory(int id)
+        {
+            var answer = (from c in dataBase.Table<Exapnses>() where (c.ID == id) select c.Category).ToList();
+            return answer[0].ToString();
+        }
+
         public int DeleteExpanse(int id)
         {
             lock (locker)

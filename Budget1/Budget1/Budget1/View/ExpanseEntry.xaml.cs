@@ -19,11 +19,11 @@ namespace Budget1.View
         public ExpanseEntry(int Id)
         {
             InitializeComponent();
-            var expanse = App.Database.GetExpanse(Id);
-            var item = App.Database.GetItem(expanse.ID);
             
+            var item = App.Database.GetItem(Id);
+            var cat = App.Database.GetCategory(Id);
 
-            Category.Text = expanse.Category;
+            Category.Text = cat;
             Item.Text = item.Item;
             Price.Text = item.Price.ToString();
             updatedID = Id;
@@ -37,20 +37,21 @@ namespace Budget1.View
 
         public void OnSave(object o, EventArgs e)
         {
+            Exapnses expanse = new Exapnses
+            {
+                Category = Category.Text
+            };
+            App.Database.SaveExpanse(expanse);
+
             Items item = new Items
             {
                 Item = Item.Text,
-                Price = Int32.Parse(Price.Text),
-   
+                Price = Int32.Parse(Price.Text)
             };
+            
             App.Database.SaveItems(item);
 
-            Exapnses expanse = new Exapnses {
-                Category = Category.Text,
-                Items =new List<Items> {item}
-        };
-
-            App.Database.SaveExpanse(expanse);
+            App.Database.SaveAll(expanse, item);
 
             Clear();
             Navigation.PushAsync(new MainPage());

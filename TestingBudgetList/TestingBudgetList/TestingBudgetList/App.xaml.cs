@@ -14,7 +14,7 @@ namespace TestingBudgetList
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new AddItemPage());
         }
 
         protected override void OnStart()

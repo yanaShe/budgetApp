@@ -6,7 +6,7 @@
   <StackLayout>
     <Label Text ="The List is:" HorizontalOptions="Center" FontSize="25"></Label>
       <Button Text="New Entry" Clicked="OnNewEntry" />
-    <ListView x:Name="CategoryList">
+    <ListView x:Name="CategoryList" >
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>

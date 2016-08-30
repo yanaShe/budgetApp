@@ -11,6 +11,7 @@ namespace TestingBudgetList.View
     public partial class MainPage : ContentPage
     {
         MainPageViewModel vm;
+        
         public MainPage()
         {
             InitializeComponent();
@@ -19,12 +20,18 @@ namespace TestingBudgetList.View
             CategoryList.ItemsSource = vm.expanses;
         }
 
-        public void OnItemTapped(object o, ItemTappedEventArgs e)
+        public async void OnItemTapped(object o, ItemTappedEventArgs e)
         {
 
             var item = e.Item as Items;
-            var message = string.Format("You selected item {0} price {1}", item.Item, item.Price.ToString());
-            DisplayAlert("Hello!", message, "Ok");
+            
+            var cat = GenerateData.FindCategoryByItem(item.Item);
+
+            await Navigation.PushAsync(new AddItemPage(item,cat));
+            //var message = string.Format("You selected item {0} price {1} in Category {2}", item.Item, item.Price.ToString(), cat);
+            //DisplayAlert("Hello!", message, "Ok");
+
+
         }
 
         public void OnCategoryTapped (object o, ItemTappedEventArgs e)

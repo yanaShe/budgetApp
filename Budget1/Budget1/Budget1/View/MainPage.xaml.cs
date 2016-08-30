@@ -32,6 +32,8 @@ namespace Budget1
         {
             base.OnAppearing();
             CategoryList.ItemsSource = App.Database.GetExpanses();
+            //ItemList.ItemSource = App.Database.GetItems();
+
 
         }
 
