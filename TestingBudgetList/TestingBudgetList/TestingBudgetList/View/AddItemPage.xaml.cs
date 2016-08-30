@@ -15,6 +15,7 @@ namespace TestingBudgetList.View
         private Color inValidColor = Color.Red;
         private string title = "Error";
         private string cancel = "Ok";
+        Guid updatedId = Guid.NewGuid();
 
 
 
@@ -29,6 +30,7 @@ namespace TestingBudgetList.View
             Category.Text = cat;
             Item.Text = item.Item;
             Price.Text = item.Price.ToString();
+            updatedId = item.ItemId;
 
             //LastName.Text = contact.LastName;
             //Email.Text = contact.Email;
@@ -96,10 +98,10 @@ namespace TestingBudgetList.View
                 DisplayAlert(title, message, cancel);
                 return;
             }
-
-                GenerateData.AddItem(category, item, price);
-                Clear();
-                Navigation.PushAsync(new MainPage());
+            
+            GenerateData.AddItem(category, item, price, updatedId);
+            Clear();
+            Navigation.PushAsync(new MainPage());
         }
 
         public void OnCancel (object o, EventArgs e)

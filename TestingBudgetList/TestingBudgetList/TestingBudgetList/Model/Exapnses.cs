@@ -16,6 +16,7 @@ namespace TestingBudgetList.Models
 
     public class Items
     {
+        public Guid ItemId { get; set; }
         public string Item { get; set; }
         public int Price { get; set; }
     }

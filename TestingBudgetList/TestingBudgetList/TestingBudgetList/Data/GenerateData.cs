@@ -13,8 +13,7 @@ namespace TestingBudgetList.Data
 {
     public class GenerateData
     {
-
-        //private static List<Exapnses> expanses = new List<Exapnses>();
+        //private static List<Exapnses> expen = new List<Exapnses>();
 
         //private static List<Exapnses> expanses = new List<Exapnses>
         //                    {
@@ -38,7 +37,7 @@ namespace TestingBudgetList.Data
         //                            }
         //};
 
-        public  GenerateData()
+        public GenerateData()
         {
         }
 
@@ -48,33 +47,43 @@ namespace TestingBudgetList.Data
             return expanse;
         } 
 
-        public static void AddItem( string category, string item, int price)
+        //public static void DeserializeHelp()
+        //{
+        //    try
+        //    {
+        //        expen = DependencyService.Get<ISerialization>().Deserialize();
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        expen = new List<Exapnses>();
+        //    }
+        //}
+
+        public static void AddItem( string category, string item, int price, Guid id)
         {
-            
-            //var expen = new List<Exapnses>();
             var expen = DependencyService.Get<ISerialization>().Deserialize();
+            //var expen = new List<Exapnses>();
             category = InitCap(category);
             item = InitCap(item);
-            
-            var items = new Items { Item = item, Price = price };
-
+            var items = new Items { ItemId = id, Item = item, Price = price };
             if (expen.Exists(x => x.Category == category))
             {
                 foreach (var exp in expen)
                 {
                     if (exp.Category == category)
-                        {
-                            exp.Items.Add(items);
-                        }
-                 }
-             }
-           else
+                    {
+                        exp.Items.Add(items);
+                    }
+                }
+            }
+            else
             {
                 expen.Add(new Exapnses
                 {
                     Category = category,
                     Items = new List<Items>
-                { new Items {Item = item, Price=price}}
+                { new Items {ItemId=id, Item = item, Price=price}}
 
                 });
             }

@@ -24,7 +24,7 @@ namespace TestingBudgetList.UWP
         {
             var serializer = new XmlSerializer(typeof(List<Exapnses>));
             //var filePath = ApplicationContext.FilesDir.AbsolutePath + "/Expanse.xml"
-            var Filename = "Expanses.xml";
+            var Filename = "Exap.xml";
             string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, Filename);
             var fs = new FileStream(path, FileMode.OpenOrCreate);
             using (StreamWriter streamWriter = new StreamWriter(fs))
@@ -32,13 +32,12 @@ namespace TestingBudgetList.UWP
                 serializer.Serialize(streamWriter, expanse);
 
             }
-
         }
 
         public List<Exapnses> Deserialize()
         {
             var serializer = new XmlSerializer(typeof(List<Exapnses>));
-            var Filename = "Expanses.xml";
+            var Filename = "Exap.xml";
             string path = Path.Combine(ApplicationData.Current.LocalFolder.Path, Filename);
             using (FileStream fs = new FileStream(path, FileMode.Open))
             {

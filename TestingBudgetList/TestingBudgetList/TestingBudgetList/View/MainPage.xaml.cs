@@ -26,9 +26,8 @@ namespace TestingBudgetList.View
             var item = e.Item as Items;
             
             var cat = GenerateData.FindCategoryByItem(item.Item);
-
+            //var message = string.Format("You selected item {0} with id {1} price {2} in Category {3}", item.Item, item.ItemId, item.Price.ToString(), cat);
             await Navigation.PushAsync(new AddItemPage(item,cat));
-            //var message = string.Format("You selected item {0} price {1} in Category {2}", item.Item, item.Price.ToString(), cat);
             //DisplayAlert("Hello!", message, "Ok");
 
 
