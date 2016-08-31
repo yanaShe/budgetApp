@@ -47,32 +47,22 @@ namespace TestingBudgetList.Data
             return expanse;
         } 
 
-        //public static void DeserializeHelp()
-        //{
-        //    try
-        //    {
-        //        expen = DependencyService.Get<ISerialization>().Deserialize();
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        expen = new List<Exapnses>();
-        //    }
-        //}
-
         public static void AddItem( string category, string item, int price, Guid id)
         {
             var expen = DependencyService.Get<ISerialization>().Deserialize();
-            //var expen = new List<Exapnses>();
             category = InitCap(category);
             item = InitCap(item);
             var items = new Items { ItemId = id, Item = item, Price = price };
+
             if (expen.Exists(x => x.Category == category))
             {
                 foreach (var exp in expen)
                 {
                     if (exp.Category == category)
                     {
+                        var itemToRemove = exp.Items.SingleOrDefault(r => r.ItemId == id);
+                        if (itemToRemove != null)
+                            exp.Items.Remove(itemToRemove);
                         exp.Items.Add(items);
                     }
                 }
@@ -88,8 +78,8 @@ namespace TestingBudgetList.Data
                 });
             }
             DependencyService.Get<ISerialization>().SerializeObject(expen);
-            //SerializeObject(expanses);
         }
+ 
         
         public static string FindCategoryByItem(string item)
         {
