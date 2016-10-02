@@ -91,7 +91,7 @@ namespace TestingBudgetList.View
                 DisplayAlert(title, message, cancel);
                 return;
             }
-
+  
             if (!result)
             {
                 var message = "The price value must be a number.";

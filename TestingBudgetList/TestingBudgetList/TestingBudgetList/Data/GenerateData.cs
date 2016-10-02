@@ -41,12 +41,23 @@ namespace TestingBudgetList.Data
         {
         }
 
+        /// <summary>
+        /// Deserializes the data from xml
+        /// </summary>
+        /// <returns>List of expanses</returns>
         public static List<Exapnses> NewData()
         {
             var expanse = DependencyService.Get<ISerialization>().Deserialize();
             return expanse;
         } 
 
+        /// <summary>
+        /// Adds Item to the list of expanses
+        /// </summary>
+        /// <param name="category">The category of the item</param>
+        /// <param name="item">The name of the item</param>
+        /// <param name="price">The price of the item</param>
+        /// <param name="id">Guid</param>
         public static void AddItem( string category, string item, int price, Guid id)
         {
             var expen = DependencyService.Get<ISerialization>().Deserialize();
@@ -56,31 +67,43 @@ namespace TestingBudgetList.Data
 
             if (expen.Exists(x => x.Category == category))
             {
-                foreach (var exp in expen)
-                {
-                    if (exp.Category == category)
-                    {
-                        var itemToRemove = exp.Items.SingleOrDefault(r => r.ItemId == id);
-                        if (itemToRemove != null)
-                            exp.Items.Remove(itemToRemove);
-                        exp.Items.Add(items);
-                    }
-                }
+                AddToExistingCategory(category, id, expen, items);
             }
             else
             {
-                expen.Add(new Exapnses
-                {
-                    Category = category,
-                    Items = new List<Items>
-                { new Items {ItemId=id, Item = item, Price=price}}
-
-                });
+                AddToNewCategory(category,items, expen);
             }
             DependencyService.Get<ISerialization>().SerializeObject(expen);
         }
- 
-        
+
+        private static void AddToNewCategory(string category, Items items, List<Exapnses> expen)
+        {
+            expen.Add(new Exapnses
+            {
+                Category = category,
+                Items = new List<Items>
+                {items}
+            });
+        }
+        private static void AddToExistingCategory(string category, Guid id, List<Exapnses> expen, Items items)
+        {
+            foreach (var exp in expen)
+            {
+                if (exp.Category == category)
+                {
+                    var itemToRemove = exp.Items.SingleOrDefault(r => r.ItemId == id);
+                    if (itemToRemove != null)
+                        exp.Items.Remove(itemToRemove);
+                    exp.Items.Add(items);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Finds the Category of the item
+        /// </summary>
+        /// <param name="item"> The item name</param>
+        /// <returns>The category name in string</returns>
         public static string FindCategoryByItem(string item)
         {
             var expanses = DependencyService.Get<ISerialization>().Deserialize();
